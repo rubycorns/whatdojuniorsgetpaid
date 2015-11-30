@@ -1,0 +1,45 @@
+<div class='container'>
+  <div class='text-center'>
+    <h1>Create a new Junior story</h1>
+  </div>
+
+  <%= simple_form_for :junior_story, url: junior_stories_path do |f| %>
+    <h4> 1. Let's start with the basics </h4>
+    <%= f.input :job, required: false, collection: ['junior developer', 'intern'], label: 'I am employed as a:' %>
+    <%= f.input :gender, required: false, placeholder: 'female', label: 'The gender I identify with is:'%>
+    <%= f.input :person_of_colour, as: :boolean, required: false, label: 'I identify as a person of colour' %>
+    <%= f.input :age, required: false, placeholder: '36' %>
+    <%= f.input :city, required: false, placeholder: 'Berlin', label: 'I live in:' %>
+    <%= f.input :country, required: false %>
+    <%= f.input :education, required: false, collection: ['self taught', 'bootcamp', 'studied computer science or related field at university', 'other'], label: 'My educational background when it comes to programming is:' %>
+
+    <hr>
+    <h4> 2. Job specifics </h4>
+    <%= f.input :first_job, required: false, collection: ['yes', 'no'], label: 'This is my first junior/intern job in the tech sector of this nature' %>
+    <%= f.input :technology, required: false, placeholder: 'Ruby on Rails', label: 'My primary technology at work is:' %>
+    <%= f.input :focus, required: false, collection: ['backend', 'frontend', 'fullstack', 'other'], label: 'My focus is mostly:' %>
+    <%= f.input :years_working_at_job, collection: ['less than 1 year', '1 - 2 years', '2 - 3 years ', 'More than 3 years'], required: false, label: 'I have been working at my current job for the following number of years:' %>
+    <%= f.input :years_working_total, collection: ['less than 1 year', '1 - 2 years', '2 - 3 years', 'More than 3 years'], required: false, label: 'I have been working as a developer for the following number of years IN TOTAL:' %>
+    <%= f.input :full_time, required: false, placeholder: 'full time/part time/hourly', label: 'I work the following hours' %>
+    <%= f.input :remote, required: false, collection: ['yes', 'no'], label: 'I work mostly remote' %>
+    <%= f.input :company_size, collection: ['less than 10 people', '10 - 30 people', '30 - 50 people', 'more than 50 people'], required: false, label: 'My company is about this size:' %>
+    <%= f.input :tech_team_size, collection: ['1 - 5 people', '5 - 10 people', '10 - 20 people', 'more than 20 people'], required: false, label: 'My tech team is about this size:' %>
+    <%= f.input :company_age, required: false, placeholder: '3', label: 'My company is about (x) years old:' %>
+    <%= f.input :salary, required: true, placeholder: '20 000', label: 'I make about this much per year AFTER TAXES' %>
+    <%= f.input :currency, collection: ['€', '$','£'], required: true %>
+
+    <hr>
+    <h4> 3. Let's dig a bit deeper </h4>
+    <%= f.input :happy_in_job, required: false, collection: ['yes', 'no'], label: 'I am happy in my job' %>
+    <%= f.input :happy_info, required: false, placeholder: "I don't get enough support, everyone is super awesome, I wish there was more candy in the workplace", label: 'I am happy/not happy because...' %>
+    <%= f.input :other, required: false, placeholder: 'Wow, what a great idea!', label: "Anything else you'd like to tell us?" %>
+
+    <hr>
+    <h4> 4. One last thing </h4>
+
+    <%= f.input :publishing_consent, as: :boolean, input_html: { checked: true } , required: true, label: 'You have my consent to anonymously publish my story so that others can learn from my experience' %>
+
+
+    <%= f.button :submit, class: 'btn btn-info' %>
+  <% end %>
+</div>

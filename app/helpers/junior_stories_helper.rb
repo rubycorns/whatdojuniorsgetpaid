@@ -1,0 +1,2 @@
+module JuniorStoriesHelper
+end

@@ -1,0 +1,36 @@
+<div class='container'>
+  <div class='row'>
+    <div class='text-center'>
+      <h1>Junior Stories:</h1>
+    </div>
+
+    <div class='junior-stories'>
+      <% @junior_stories.each do |j| %>
+        <p>
+          <%= j.job_sentence %>
+          <%= j.gender_sentence %>
+          <%= j.person_of_colour_sentence %>
+          <%= j.age_sentence %>
+          <%= j.city_sentence %>
+          <%= j.country_sentence %>
+          <%= j.education_sentence %>
+          <%= j.first_job_sentence %>
+          <%= j.technology_sentence %>
+          <%= j.focus_sentence %>
+          <%= j.years_working_at_job_sentence %>
+          <%= j.years_working_total_sentence %>
+          <%= j.full_time_sentence %>
+          <%= j.remote_sentence %>
+          <%= j.company_size_sentence %>
+          <%= j.tech_team_size_sentence %>
+          <%= j.company_age_sentence %>
+          <%= j.salary_sentence %>
+          <%= j.happy_in_job_sentence %>
+          <%= j.happy_info_sentence %>
+          <%= j.other_sentence %>
+        </p>
+        <hr>
+      <% end %>
+    </div>
+  </div>
+</div>
