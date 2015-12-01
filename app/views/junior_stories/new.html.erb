@@ -15,12 +15,13 @@
 
     <hr>
     <h4> 2. Job specifics </h4>
+    <%= f.input :freelancer, as: :boolean, required: true, label: 'I am a freelancer' %>
     <%= f.input :first_job, required: false, collection: ['yes', 'no'], label: 'This is my first junior/intern job in the tech sector of this nature' %>
     <%= f.input :technology, required: false, placeholder: 'Ruby on Rails', label: 'My primary technology at work is:' %>
     <%= f.input :focus, required: false, collection: ['backend', 'frontend', 'fullstack', 'other'], label: 'My focus is mostly:' %>
     <%= f.input :years_working_at_job, collection: ['less than 1 year', '1 - 2 years', '2 - 3 years ', 'More than 3 years'], required: false, label: 'I have been working at my current job for the following number of years:' %>
     <%= f.input :years_working_total, collection: ['less than 1 year', '1 - 2 years', '2 - 3 years', 'More than 3 years'], required: false, label: 'I have been working as a developer for the following number of years IN TOTAL:' %>
-    <%= f.input :full_time, required: false, placeholder: 'full time/part time/hourly', label: 'I work the following hours' %>
+    <%= f.input :days_per_week, required: false, collection: ['1', '2', '3', '4', '5'], label: 'I work the following numbers of days a week:' %>
     <%= f.input :remote, required: false, collection: ['yes', 'no'], label: 'I work mostly remote' %>
     <%= f.input :company_size, collection: ['less than 10 people', '10 - 30 people', '30 - 50 people', 'more than 50 people'], required: false, label: 'My company is about this size:' %>
     <%= f.input :tech_team_size, collection: ['1 - 5 people', '5 - 10 people', '10 - 20 people', 'more than 20 people'], required: false, label: 'My tech team is about this size:' %>

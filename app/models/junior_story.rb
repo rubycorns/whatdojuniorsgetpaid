@@ -3,6 +3,7 @@ class JuniorStory < ActiveRecord::Base
   validates :salary, presence: true
   validates :currency, presence: true
   validates :publishing_consent, presence: true
+  validates :freelancer, presence: true
 
   scope :can_publish, -> { where(publishing_consent: true) }
 
@@ -34,6 +35,14 @@ class JuniorStory < ActiveRecord::Base
     "My educational field when it comes to programming is #{education}." if education.present?
   end
 
+  def freelancer_sentence
+    if freelancer == true
+      "I am a freelancer."
+    else
+      "I am not a freelancer."
+    end
+  end
+
   def first_job_sentence
     if first_job.present?
       if first_job == 'yes'
@@ -61,7 +70,7 @@ class JuniorStory < ActiveRecord::Base
   end
 
   def full_time_sentence
-    "I work #{full_time}." if full_time.present?
+    "I work #{days_per_week} days per week." if days_per_week.present?
   end
 
   def remote_sentence

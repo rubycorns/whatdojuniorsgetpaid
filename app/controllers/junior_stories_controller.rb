@@ -23,9 +23,9 @@ class JuniorStoriesController < ApplicationController
   private
   def junior_story_params
     params.require(:junior_story).permit(:job, :happy_in_job, :happy_info,
-      :gender, :city, :country, :full_time, :salary, :currency, :technology, :focus,
+      :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
       :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
       :remote, :tech_team_size, :company_size, :company_age, :person_of_colour, :other,
-      :publishing_consent)
+      :publishing_consent, :freelancer)
   end
 end
