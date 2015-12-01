@@ -17,7 +17,7 @@
     <h4> 2. Job specifics </h4>
     <%= f.input :freelancer, as: :boolean, required: true, label: 'I am a freelancer' %>
     <%= f.input :first_job, required: false, collection: ['yes', 'no'], label: 'This is my first junior/intern job in the tech sector of this nature' %>
-    <%= f.input :technology, required: false, placeholder: 'Ruby on Rails', label: 'My primary technology at work is:' %>
+    <%= f.input :technology, required: false, collection: ['Ruby (Rails, Sinatra etc...)', 'Python (Django, Flask etc...)', 'C++', 'C#', 'C', 'Javascript frontend(Ember JS, React JS, Angular JS etc...)', 'Javascript backend', 'Scala', 'PHP', 'Perl', 'Java', 'Swift', 'R', 'Closure', 'Go', 'Groovy', 'CSS & variants', 'Rust' ], label: 'My primary technology at work is:' %>
     <%= f.input :focus, required: false, collection: ['backend', 'frontend', 'fullstack', 'other'], label: 'My focus is mostly:' %>
     <%= f.input :years_working_at_job, collection: ['less than 1 year', '1 - 2 years', '2 - 3 years ', 'More than 3 years'], required: false, label: 'I have been working at my current job for the following number of years:' %>
     <%= f.input :years_working_total, collection: ['less than 1 year', '1 - 2 years', '2 - 3 years', 'More than 3 years'], required: false, label: 'I have been working as a developer for the following number of years IN TOTAL:' %>
@@ -26,18 +26,17 @@
     <%= f.input :company_size, collection: ['less than 10 people', '10 - 30 people', '30 - 50 people', 'more than 50 people'], required: false, label: 'My company is about this size:' %>
     <%= f.input :tech_team_size, collection: ['1 - 5 people', '5 - 10 people', '10 - 20 people', 'more than 20 people'], required: false, label: 'My tech team is about this size:' %>
     <%= f.input :company_age, required: false, placeholder: '3', label: 'My company is about (x) years old:' %>
-    <%= f.input :salary, required: true, placeholder: '20 000', label: 'I make about this much per year AFTER TAXES' %>
-    <%= f.input :currency, collection: ['€', '$','£'], required: true %>
+    <%= f.input :salary, required: true, placeholder: '20 000', label: 'I make about this much per year before taxes' %>
+    <%= f.input :currency, collection: ['€', '£', '$ (Canadian)','$ (US)', '$ (Australian)'], required: true %>
 
     <hr>
     <h4> 3. Let's dig a bit deeper </h4>
-    <%= f.input :happy_in_job, required: false, collection: ['yes', 'no'], label: 'I am happy in my job' %>
-    <%= f.input :happy_info, required: false, placeholder: "I don't get enough support, everyone is super awesome, I wish there was more candy in the workplace", label: 'I am happy/not happy because...' %>
+    <%= f.input :happy_in_job, required: false, collection: ['1', '2', '3', '4', '5'], label: 'I am happy in my job (5 being very happy, 1 being very unhappy)' %>
+    <%= f.input :happy_info, required: false, placeholder: "I don't get enough support, everyone is super awesome, I wish there was more candy in the workplace", label: 'My happiness level at work is because of...' %>
     <%= f.input :other, required: false, placeholder: 'Wow, what a great idea!', label: "Anything else you'd like to tell us?" %>
 
     <hr>
     <h4> 4. One last thing </h4>
-
     <%= f.input :publishing_consent, as: :boolean, input_html: { checked: true } , required: true, label: 'You have my consent to anonymously publish my story so that others can learn from my experience' %>
 
 
