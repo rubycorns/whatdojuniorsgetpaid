@@ -15,7 +15,7 @@
 
     <hr>
     <h4> 2. Job specifics </h4>
-    <%= f.input :freelancer, as: :boolean, required: true, label: 'I am a freelancer' %>
+    <%= f.input :freelancer, required: true, collection: ['yes', 'no' ], label: 'I am a freelancer' %>
     <%= f.input :first_job, required: false, collection: ['yes', 'no'], label: 'This is my first junior/intern job in the tech sector of this nature' %>
     <%= f.input :technology, required: false, collection: ['Ruby (Rails, Sinatra etc...)', 'Python (Django, Flask etc...)', 'C++', 'C#', 'C', 'Javascript frontend(Ember JS, React JS, Angular JS etc...)', 'Javascript backend', 'Scala', 'PHP', 'Perl', 'Java', 'Swift', 'R', 'Closure', 'Go', 'Groovy', 'CSS & variants', 'Rust' ], label: 'My primary technology at work is:' %>
     <%= f.input :focus, required: false, collection: ['backend', 'frontend', 'fullstack', 'other'], label: 'My focus is mostly:' %>

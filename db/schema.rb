@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201185836) do
+ActiveRecord::Schema.define(version: 20151201202213) do
 
   create_table "junior_stories", force: :cascade do |t|
     t.string   "job"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20151201185836) do
     t.boolean  "publishing_consent",   default: true
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.boolean  "freelancer",           default: false
+    t.string   "freelancer"
   end
 
 end
