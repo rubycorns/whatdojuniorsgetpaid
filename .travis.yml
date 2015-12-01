@@ -1,0 +1,11 @@
+language: ruby
+rvm: 2.2.2
+sudo: false
+cache: bundler
+before_script:
+  - "bundle exec rake db:migrate"
+script: "bundle exec rspec"
+notifications:
+  email:
+    recipients:
+      - rubycorns@googlegroups.com
