@@ -7,6 +7,8 @@ class JuniorStory < ActiveRecord::Base
 
   scope :can_publish, -> { where(publishing_consent: true) }
 
+  before_save :sanitize_city, :sanitize_gender
+
   def job_sentence
     "I am working as a #{job}." if job.present?
   end
@@ -115,5 +117,15 @@ class JuniorStory < ActiveRecord::Base
 
   def other_sentence
     "#{other}" if other.present?
+  end
+
+  private
+
+  def sanitize_city
+    self.city = city.strip.capitalize if city.present?
+  end
+
+  def sanitize_gender
+    self.gender = gender.strip.downcase if gender.present?
   end
 end
