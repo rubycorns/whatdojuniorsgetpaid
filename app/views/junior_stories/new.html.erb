@@ -3,7 +3,17 @@
     <h1>Create a new Junior story</h1>
   </div>
 
-  <%= simple_form_for :junior_story, url: junior_stories_path do |f| %>
+  <div class='form-description'>
+    <p> Thanks so much for taking time to fill out this form! Your input will go a long way towards helping other tech newbies.</p>
+
+    <p>Fill in as much or as little information as you like. The only required fields are "freelancer" (because freelance wages can be quite high and risk throwing off our data), "salary" (because that's what this is all about!), "currency", and of course "permission to publish". If you don't check that last checkbox, we won't share your story with others.</p>
+
+    <p>That being said, this is completely anonymous. So we encourage you to share your story with others.</p>
+  </div>
+
+  <%= simple_form_for @junior_story, url: junior_stories_path do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
     <h4> 1. Let's start with the basics </h4>
     <%= f.input :job, required: false, collection: ['junior developer', 'intern'], label: 'I am employed as a:' %>
     <%= f.input :gender, required: false, placeholder: 'female', label: 'The gender I identify with is:'%>
