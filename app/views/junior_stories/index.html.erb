@@ -4,6 +4,8 @@
       <h1>Junior Stories:</h1>
     </div>
 
+    <%= link_to "Download as CSV", junior_stories_path(format: "csv"), class: 'btn btn-info' %>
+
     <div class='junior-stories'>
       <% @junior_stories.each do |j| %>
         <p>
