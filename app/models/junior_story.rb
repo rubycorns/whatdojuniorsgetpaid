@@ -98,7 +98,7 @@ class JuniorStory < ActiveRecord::Base
   end
 
   def salary_sentence
-    "My salary is #{salary} #{currency} per year after taxes."
+    "My salary is #{salary} #{currency} per year before taxes."
   end
 
   def happy_in_job_sentence
