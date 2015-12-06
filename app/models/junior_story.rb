@@ -1,3 +1,5 @@
+require 'csv'
+
 class JuniorStory < ActiveRecord::Base
 
   validates :salary, presence: true
@@ -117,6 +119,22 @@ class JuniorStory < ActiveRecord::Base
 
   def other_sentence
     "#{other}" if other.present?
+  end
+
+  def self.to_csv(options = {})
+    csv_string = CSV.generate(options) do |csv|
+      csv << JuniorStory.attribute_names
+      JuniorStory.all.each do |story|
+        csv << story.attributes.values
+      end
+    end
+  end
+
+  def to_csv(options = {})
+    csv_string = CSV.generate(options) do |csv|
+      csv << JuniorStory.attribute_names
+      csv << attributes.values
+    end
   end
 
   private
