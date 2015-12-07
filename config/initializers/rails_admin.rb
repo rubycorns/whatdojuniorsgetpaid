@@ -1,6 +1,7 @@
 RailsAdmin.config do |config|
   config.actions do
-    # no root actions
+    # root actions
+    dashboard
     # only index collection action
     index
     # new, edit etc is NOT allowed
