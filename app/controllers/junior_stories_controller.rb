@@ -4,7 +4,7 @@ class JuniorStoriesController < ApplicationController
     @junior_stories = JuniorStory.can_publish
     respond_to do |format|
       format.html
-      format.csv { send_data @junior_stories.to_csv }
+      format.csv { send_data @junior_stories.to_csv, type: 'application/csv' }
     end
   end
 
