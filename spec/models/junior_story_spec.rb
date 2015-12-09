@@ -23,30 +23,15 @@ describe JuniorStory do
 
   describe '.to_csv' do
     before do
-      junior_story.save
-      another_junior_story = build :junior_story
-      another_junior_story.save
+      (build :junior_story).save
+      (build :junior_story, publishing_consent: false).save
     end
 
-    it 'should contain all JuniorStories with all fields' do
+    it 'should contain all JuniorStories with publishing consent including all fields' do
       csv = JuniorStory.to_csv
       rows = csv.split("\n")
-      expect(rows.count).to eq(3)
-      rows.each do |row|
-        expect(row.split(',').count).to eq(JuniorStory.attribute_names.count)
-      end
-    end
-  end
-
-  describe '#to_csv' do
-    before do
-      junior_story.save
-    end
-
-    it 'creates a csv for one juniorstory' do
-      csv = junior_story.to_csv
-      rows = csv.split("\n")
-      expect(rows.count).to eq(2)
+      expected_row_count = JuniorStory.where(publishing_consent: true).count + 1 # +1 for header row
+      expect(rows.count).to eq(expected_row_count)
       rows.each do |row|
         expect(row.split(',').count).to eq(JuniorStory.attribute_names.count)
       end

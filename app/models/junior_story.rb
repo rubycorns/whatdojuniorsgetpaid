@@ -122,18 +122,11 @@ class JuniorStory < ActiveRecord::Base
   end
 
   def self.to_csv(options = {})
-    csv_string = CSV.generate(options) do |csv|
-      csv << JuniorStory.attribute_names
-      JuniorStory.all.each do |story|
+    CSV.generate(options) do |csv|
+      csv << attribute_names
+      find_each do |story|
         csv << story.attributes.values
       end
-    end
-  end
-
-  def to_csv(options = {})
-    csv_string = CSV.generate(options) do |csv|
-      csv << JuniorStory.attribute_names
-      csv << attributes.values
     end
   end
 
