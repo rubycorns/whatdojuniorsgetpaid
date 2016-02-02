@@ -21,20 +21,29 @@ describe JuniorStory do
     end
   end
 
+  describe '#publishable_attributes' do
+    let(:junior_story)   { build_stubbed :junior_story, publishing_consent: true, happy_in_job: 'ya, kinda, could be better though'}
+    let(:junior_story_2) { build_stubbed :junior_story, publishing_consent: false, happy_in_job: 'my job is amazing!' }
+
+    it 'should correctly remove values if consent is not given' do
+      expect(junior_story.publishable_attributes['happy_in_job']).to eql junior_story.happy_in_job
+      expect(junior_story_2.publishable_attributes['happy_in_job']).to eql ''
+    end
+  end
+
   describe '.to_csv' do
-    before do
-      (build :junior_story).save
-      (build :junior_story, publishing_consent: false).save
+    let!(:junior_story)   { create :junior_story, publishing_consent: true }
+    let!(:junior_story_2) { create :junior_story, publishing_consent: false }
+    let(:csv)             { JuniorStory.to_csv }
+    let(:rows)            { csv.split("\n") }
+
+    it 'should contain the correct number of rows' do
+      expected_row_count = JuniorStory.count + 1 # +1 for header row
+      expect(rows.count).to eq(expected_row_count)
     end
 
-    it 'should contain all JuniorStories with publishing consent including all fields' do
-      csv = JuniorStory.to_csv
-      rows = csv.split("\n")
-      expected_row_count = JuniorStory.where(publishing_consent: true).count + 1 # +1 for header row
-      expect(rows.count).to eq(expected_row_count)
-      rows.each do |row|
-        expect(row.split(',').count).to eq(JuniorStory.attribute_names.count)
-      end
+    it 'should contain the correct attributes' do
+      expect(rows.second.split(',').count).to eq(JuniorStory.attribute_names.count)
     end
   end
 end

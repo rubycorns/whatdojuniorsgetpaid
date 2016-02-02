@@ -1,7 +1,8 @@
 class JuniorStoriesController < ApplicationController
 
   def index
-    @junior_stories = JuniorStory.can_publish
+    @junior_stories = JuniorStory.all
+
     respond_to do |format|
       format.html
       format.csv { send_data @junior_stories.to_csv, type: 'application/csv' }

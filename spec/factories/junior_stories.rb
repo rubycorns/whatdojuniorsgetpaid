@@ -3,6 +3,6 @@ FactoryGirl.define do
     salary 20000
     currency '$ (US)'
     publishing_consent true
-    freelancer false
+    freelancer 'no'
   end
 end
