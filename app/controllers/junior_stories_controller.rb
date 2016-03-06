@@ -1,7 +1,7 @@
 class JuniorStoriesController < ApplicationController
 
   def index
-    @junior_stories = JuniorStory.can_publish
+    @junior_stories = JuniorStory.filter(params.except(:controller, :action)).can_publish
   end
 
   def new

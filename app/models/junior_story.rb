@@ -1,4 +1,5 @@
 class JuniorStory < ActiveRecord::Base
+  include Filterable
 
   validates :salary, presence: true
   validates :currency, presence: true
