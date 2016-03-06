@@ -7,7 +7,7 @@ junior_stories = [
     city: 'Berlin',
     country: 'DE',
     education: 'self taught',
-    freelancer: false,
+    freelancer: 'yes',
     first_job: 'no',
     technology: 'RoR',
     focus: 'backend',
@@ -20,9 +20,10 @@ junior_stories = [
     company_age: 5,
     salary: 15000,
     currency: '€',
-    happy_in_job: 'yes',
+    happy_in_job: '5',
     happy_info: '',
-    other: 'Thanks'
+    other: 'Thanks',
+    publishing_consent: false
   },
   {
     job: 'intern',
@@ -32,7 +33,7 @@ junior_stories = [
     city: 'New York',
     country: 'USA',
     education: 'bootcamp',
-    freelancer: false,
+    freelancer: 'no',
     first_job: 'yes',
     technology: 'Javascript',
     focus: 'fullstack',
@@ -45,9 +46,10 @@ junior_stories = [
     company_age: 5,
     salary: 10000,
     currency: '$',
-    happy_in_job: 'no',
+    happy_in_job: '1',
     happy_info: 'I am lonely.',
-    other: ''
+    other: '',
+    publishing_consent: true
   }
 ]
 

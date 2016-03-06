@@ -2,6 +2,11 @@ class JuniorStoriesController < ApplicationController
 
   def index
     @junior_stories = JuniorStory.filter(params.except(:controller, :action)).can_publish
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @junior_stories.to_csv, type: 'application/csv' }
+    end
   end
 
   def new

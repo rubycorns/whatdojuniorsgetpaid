@@ -3,7 +3,6 @@ module Filterable
 
   module ClassMethods
     def filter(params)
-      params.except(:controller, :action)
       results = self.all
       params.each do |key, value|
         results = results.where(key => value) if value.present?

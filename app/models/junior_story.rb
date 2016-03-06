@@ -1,14 +1,15 @@
+require 'csv'
+
 class JuniorStory < ActiveRecord::Base
   include Filterable
 
   validates :salary, presence: true
   validates :currency, presence: true
-  validates :publishing_consent, presence: true
   validates :freelancer, presence: true
 
-  scope :can_publish, -> { where(publishing_consent: true) }
-
   before_save :sanitize_city, :sanitize_gender
+
+  CONSENT_ATTRIBUTES = %w(happy_in_job happy_info other)
 
   def job_sentence
     "I am working as a #{job}." if job.present?
@@ -39,7 +40,7 @@ class JuniorStory < ActiveRecord::Base
   end
 
   def freelancer_sentence
-    if freelancer == true
+    if freelancer == 'yes'
       "I am a freelancer."
     else
       "I am not a freelancer."
@@ -99,25 +100,42 @@ class JuniorStory < ActiveRecord::Base
   end
 
   def salary_sentence
-    "My salary is #{salary} #{currency} per year after taxes."
+    "My salary is #{salary} #{currency} per year before taxes."
+  end
+
+  def can_publish?
+    publishing_consent?
   end
 
   def happy_in_job_sentence
-    if happy_in_job.present?
-      if happy_in_job == 'yes'
-        "I am happy in my job."
-      else
-        "I am not happy in my job."
-      end
-    end
+    "On a scale of 1 - 5, my happiness level in my job is a #{happy_in_job}." if can_publish? && happy_in_job.present?
   end
 
   def happy_info_sentence
-    "#{happy_info}" if happy_info.present?
+    "Additional information when it comes to my happiness: #{happy_info}." if can_publish? && happy_info.present?
   end
 
   def other_sentence
-    "#{other}" if other.present?
+    "Additional information: #{other}" if can_publish? && other.present?
+  end
+
+  def publishable_attributes
+    values = attributes
+    unless can_publish?
+      CONSENT_ATTRIBUTES.each do |attribute|
+        values[attribute] = ''
+      end
+    end
+    values
+  end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << attribute_names
+      find_each do |story|
+        csv << story.publishable_attributes.values
+      end
+    end
   end
 
   private

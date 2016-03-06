@@ -6,9 +6,9 @@
   <div class='form-description'>
     <p> Thanks so much for taking time to fill out this form! Your input will go a long way towards helping other tech newbies.</p>
 
-    <p>Fill in as much or as little information as you like. The only required fields are "freelancer" (because freelance wages can be quite high and risk throwing off our data), "salary" (because that's what this is all about!), "currency", and of course "permission to publish". If you don't check that last checkbox, we won't share your story with others.</p>
+    <p>Fill in as much or as little information as you like. In the following section, the only required fields are "freelancer" (because freelance wages can be quite high and risk throwing off our data), "salary" (because that's what this is all about!), and "currency"</p>
 
-    <p>That being said, this is completely anonymous. So we encourage you to share your story with others.</p>
+    <p>Please keep in mind that this will be published for everyone to see. That being said, this is completely anonymous, so we encourage you to share your story with others.</p>
   </div>
 
   <%= simple_form_for @junior_story, url: junior_stories_path do |f| %>
@@ -41,14 +41,15 @@
 
     <hr>
     <h4> 3. Let's dig a bit deeper </h4>
+    <div class='form-description'>
+      <p>
+        The following section is a bit more personal. We will not publish it if you won't want us to.
+        <%= f.input :publishing_consent, as: :boolean, input_html: { checked: true }, label: 'You have my consent to publish this slightly more personal information about myself.' %>
+      </p>
+    </div>
     <%= f.input :happy_in_job, required: false, collection: ['1', '2', '3', '4', '5'], label: 'I am happy in my job (5 being very happy, 1 being very unhappy)' %>
     <%= f.input :happy_info, required: false, placeholder: "I don't get enough support, everyone is super awesome, I wish there was more candy in the workplace", label: 'My happiness level at work is because of...' %>
     <%= f.input :other, required: false, placeholder: 'Wow, what a great idea!', label: "Anything else you'd like to tell us?" %>
-
-    <hr>
-    <h4> 4. One last thing </h4>
-    <%= f.input :publishing_consent, as: :boolean, input_html: { checked: true } , required: true, label: 'You have my consent to anonymously publish my story so that others can learn from my experience' %>
-
 
     <%= f.button :submit, class: 'btn btn-info' %>
   <% end %>
