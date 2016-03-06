@@ -1,7 +1,8 @@
 class JuniorStoriesController < ApplicationController
 
   def index
-    @junior_stories = JuniorStory.filter(params.except(:controller, :action))
+    @junior_stories = JuniorStory.
+      filter(params.except(:controller, :action, :format))
 
     respond_to do |format|
       format.html
