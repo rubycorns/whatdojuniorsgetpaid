@@ -4,7 +4,9 @@ class JuniorStoriesController < ApplicationController
     @junior_stories = JuniorStory.
       filter(params.except(:controller, :action, :format))
 
-    @fields = JuniorStory.attribute_names
+    @fields = JuniorStory.attribute_names - ['publishing_consent',
+                                             'updated_at',
+                                             'created_at']
 
     respond_to do |format|
       format.html
