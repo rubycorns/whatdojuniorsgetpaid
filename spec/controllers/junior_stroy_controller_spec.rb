@@ -51,7 +51,7 @@ describe JuniorStoriesController do
     end
 
     context 'with illegal filter params' do
-      it 'returns only the filter appropriate junior_story' do
+      it 'ignores illegal filter params but respects legal filter params' do
         female_story = build :junior_story
         female_story.gender = 'female'
         female_story.save
@@ -61,8 +61,8 @@ describe JuniorStoriesController do
         male_story.save
 
 
-        get :index, { 'makes_no_sense' => 'random' }
-        expect(assigns(:junior_stories)).to eq([female_story, male_story])
+        get :index, { 'makes_no_sense' => 'random', 'gender' => 'female' }
+        expect(assigns(:junior_stories)).to eq([female_story])
       end
 
       it 'renders the index template' do
