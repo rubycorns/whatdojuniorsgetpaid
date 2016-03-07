@@ -4,6 +4,8 @@ class JuniorStoriesController < ApplicationController
     @junior_stories = JuniorStory.
       filter(params.except(:controller, :action, :format))
 
+    @fields = JuniorStory.attribute_names
+
     respond_to do |format|
       format.html
       format.csv { send_data @junior_stories.to_csv, type: 'application/csv' }
