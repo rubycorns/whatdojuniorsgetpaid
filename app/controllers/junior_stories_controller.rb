@@ -2,13 +2,14 @@ class JuniorStoriesController < ApplicationController
 
   def index
     @junior_stories = JuniorStory.
-      filter(params.except(:method, :controller, :action, :format, :utf8, :authenticity_token,))
+      filter(params.except(:method, :controller, :action, :format, :utf8, :authenticity_token))
 
     @fields = fields
+    @csv_params = params.except(:method, :controller, :action, :format, :utf8, :authenticity_token).merge({ format: 'csv' })
 
     respond_to do |format|
       format.html
-      format.csv { send_data @junior_stories.to_csv, type: 'application/csv' }
+      format.csv { send_data @junior_stories.to_csv, type: 'application/csv', filename: 'junior_stories.csv' }
     end
   end
 
