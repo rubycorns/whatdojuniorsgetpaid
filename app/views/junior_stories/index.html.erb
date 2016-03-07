@@ -20,12 +20,12 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-              <% @fields.each do |field| %>
+              <% @fields.each do |name, demo_value| %>
                 <div class="form-group">
                   <div class="col-sm-offset-1"></div>
-                  <label class="col-sm-4 control-label"><%= field %></label>
+                  <label class="col-sm-4 control-label"><%= name %></label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="search term">
+                    <input type="text" class="form-control" placeholder="<%= demo_value %>">
                   </div>
                 </div>
               <%end %>
