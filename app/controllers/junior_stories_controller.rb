@@ -2,7 +2,7 @@ class JuniorStoriesController < ApplicationController
 
   def index
     @junior_stories = JuniorStory.
-      filter(params.except(:controller, :action, :format))
+      filter(params.except(:method, :controller, :action, :format, :utf8, :authenticity_token,))
 
     @fields = fields
 
