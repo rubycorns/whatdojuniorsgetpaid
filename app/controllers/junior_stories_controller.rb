@@ -2,10 +2,10 @@ class JuniorStoriesController < ApplicationController
 
   def index
     @junior_stories = JuniorStory.
-      filter(params.except(:method, :controller, :action, :format, :utf8, :authenticity_token))
+      filter(allowed_params)
 
     @fields = fields
-    @csv_params = params.except(:method, :controller, :action, :format, :utf8, :authenticity_token).merge({ format: 'csv' })
+    @csv_params = allowed_params.merge({ format: 'csv' })
 
     respond_to do |format|
       format.html
@@ -32,6 +32,14 @@ class JuniorStoriesController < ApplicationController
   private
   def junior_story_params
     params.require(:junior_story).permit(:job, :happy_in_job, :happy_info,
+      :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
+      :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
+      :remote, :tech_team_size, :company_size, :company_age, :person_of_colour, :other,
+      :publishing_consent, :freelancer)
+  end
+
+  def allowed_params
+    params.permit(:job, :happy_in_job, :happy_info,
       :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
       :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
       :remote, :tech_team_size, :company_size, :company_age, :person_of_colour, :other,
