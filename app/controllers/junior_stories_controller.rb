@@ -2,10 +2,10 @@ class JuniorStoriesController < ApplicationController
 
   def index
     @junior_stories = JuniorStory.
-      filter(allowed_params)
+      filter(allowed_params(params))
 
     @fields = fields
-    @csv_params = allowed_params.merge({ format: 'csv' })
+    @csv_params = allowed_params(params).merge({ format: 'csv' })
 
     respond_to do |format|
       format.html
@@ -21,7 +21,7 @@ class JuniorStoriesController < ApplicationController
   end
 
   def create
-    @junior_story = JuniorStory.new(junior_story_params)
+    @junior_story = JuniorStory.new(allowed_params(required_params))
     if @junior_story.save
       redirect_to junior_stories_path
     else
@@ -30,15 +30,11 @@ class JuniorStoriesController < ApplicationController
   end
 
   private
-  def junior_story_params
-    params.require(:junior_story).permit(:job, :happy_in_job, :happy_info,
-      :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
-      :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
-      :remote, :tech_team_size, :company_size, :company_age, :person_of_colour, :other,
-      :publishing_consent, :freelancer)
+  def required_params
+    params.require(:junior_story)
   end
 
-  def allowed_params
+  def allowed_params(params)
     params.permit(:job, :happy_in_job, :happy_info,
       :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
       :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
