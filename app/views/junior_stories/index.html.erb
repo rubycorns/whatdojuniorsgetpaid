@@ -9,8 +9,9 @@
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
       Filter Stories
     </button>
+    <% if @filtered %>
     <%= link_to "Reset filters", junior_stories_path, class: 'btn btn-info' %>
-
+    <% end %>
     <!-- Filter Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">

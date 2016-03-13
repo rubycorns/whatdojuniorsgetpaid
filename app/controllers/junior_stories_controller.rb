@@ -7,6 +7,8 @@ class JuniorStoriesController < ApplicationController
     @fields = fields
     @csv_params = allowed_params(params).merge({ format: 'csv' })
 
+    @filtered = params_set?
+
     respond_to do |format|
       format.html
       format.csv { send_data @junior_stories.to_csv, type: 'application/csv', filename: 'junior_stories.csv' }
@@ -69,5 +71,11 @@ class JuniorStoriesController < ApplicationController
       other: "Thanks",
       freelancer: "f"
     }
+  end
+
+  def params_set?
+    values = allowed_params(params).values
+    values.reject { |value| value.blank? || value.empty? || value.nil? }
+    !values.empty?
   end
 end
