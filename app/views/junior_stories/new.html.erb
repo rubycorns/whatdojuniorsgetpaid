@@ -18,6 +18,7 @@
     <%= f.input :job, required: false, collection: ['junior developer', 'intern'], label: 'I am employed as a:' %>
     <%= f.input :gender, required: false, placeholder: 'female', label: 'The gender I identify with is:'%>
     <%= f.input :person_of_colour, as: :boolean, required: false, label: 'I identify as a person of colour' %>
+    <%= f.input :person_with_disability, required: false, collection: [['yes', true], ['no', false]], label: 'I identify as a person with a disability' %>
     <%= f.input :age, required: false, placeholder: '36' %>
     <%= f.input :city, required: false, placeholder: 'Berlin', label: 'I live in:' %>
     <%= f.input :country, required: false %>
