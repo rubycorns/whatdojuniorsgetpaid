@@ -44,7 +44,7 @@
     <div class='form-description'>
       <p>
         The following section is a bit more personal. We will not publish it if you won't want us to.
-        <%= f.input :publishing_consent, as: :boolean, input_html: { checked: true }, label: 'You have my consent to publish this slightly more personal information about myself.' %>
+        <%= f.input :publishing_consent, as: :boolean, input_html: { checked: false }, label: 'You have my consent to publish this slightly more personal information about myself.' %>
       </p>
     </div>
     <%= f.input :happy_in_job, required: false, collection: ['1', '2', '3', '4', '5'], label: 'I am happy in my job (5 being very happy, 1 being very unhappy)' %>
