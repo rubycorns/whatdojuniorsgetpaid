@@ -22,6 +22,10 @@ class JuniorStory < ActiveRecord::Base
     "I am a person of colour." if person_of_colour?
   end
 
+  def person_with_disability_sentence
+    "I am a person with a disability." if person_with_disability?
+  end
+
   def age_sentence
     "I am #{age} years old." if age.present?
   end
