@@ -1,6 +1,6 @@
 require 'csv'
 
-class JuniorStory < ActiveRecord::Base
+class JuniorStory < ApplicationRecord
 
   validates :salary, presence: true
   validates :currency, presence: true
