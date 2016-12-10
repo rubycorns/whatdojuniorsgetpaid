@@ -46,4 +46,19 @@ describe JuniorStory do
       expect(rows.second.split(',').count).to eq(JuniorStory.attribute_names.count)
     end
   end
+
+  describe "#person_with_disability_sentence" do
+
+    context "person with disability set to true" do
+      let!(:junior_story) { build_stubbed :junior_story, person_with_disability: true }
+      specify { expect(junior_story.person_with_disability_sentence).to eq 'I am a person with a disability.' }
+    end
+
+    context "person with disability set to false" do
+      let!(:junior_story) { build_stubbed :junior_story, person_with_disability: false }
+      specify { expect(junior_story.person_with_disability_sentence).to eq nil }
+    end
+
+  end
+
 end

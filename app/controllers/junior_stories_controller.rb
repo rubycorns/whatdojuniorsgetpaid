@@ -41,7 +41,7 @@ class JuniorStoriesController < ApplicationController
       :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
       :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
       :remote, :tech_team_size, :company_size, :company_age, :person_of_colour, :other,
-      :publishing_consent, :freelancer)
+      :publishing_consent, :freelancer, :person_with_disability)
   end
 
   # TODO: shouldn't hard code this, but I like having demo search terms in the list

@@ -1,6 +1,6 @@
 require 'csv'
 
-class JuniorStory < ActiveRecord::Base
+class JuniorStory < ApplicationRecord
   include Filterable
 
   validates :salary, presence: true
@@ -21,6 +21,10 @@ class JuniorStory < ActiveRecord::Base
 
   def person_of_colour_sentence
     "I am a person of colour." if person_of_colour?
+  end
+
+  def person_with_disability_sentence
+    "I am a person with a disability." if person_with_disability?
   end
 
   def age_sentence

@@ -23,7 +23,8 @@ junior_stories = [
     happy_in_job: '5',
     happy_info: '',
     other: 'Thanks',
-    publishing_consent: false
+    publishing_consent: false,
+    person_with_disability: false
   },
   {
     job: 'intern',
@@ -49,7 +50,8 @@ junior_stories = [
     happy_in_job: '1',
     happy_info: 'I am lonely.',
     other: '',
-    publishing_consent: true
+    publishing_consent: true,
+    person_with_disability: true
   }
 ]
 
