@@ -1,11 +1,17 @@
 class JuniorStoriesController < ApplicationController
 
   def index
-    @junior_stories = JuniorStory.all
+    @junior_stories = JuniorStory.
+      filter(allowed_params(params))
+
+    @fields = fields
+    @csv_params = allowed_params(params).merge({ format: 'csv' })
+
+    @filtered = params_set?
 
     respond_to do |format|
       format.html
-      format.csv { send_data @junior_stories.to_csv, type: 'application/csv' }
+      format.csv { send_data @junior_stories.to_csv, type: 'application/csv', filename: 'junior_stories.csv' }
     end
   end
 
@@ -17,7 +23,7 @@ class JuniorStoriesController < ApplicationController
   end
 
   def create
-    @junior_story = JuniorStory.new(junior_story_params)
+    @junior_story = JuniorStory.new(allowed_params(required_params))
     if @junior_story.save
       redirect_to junior_stories_path
     else
@@ -26,11 +32,50 @@ class JuniorStoriesController < ApplicationController
   end
 
   private
-  def junior_story_params
-    params.require(:junior_story).permit(:job, :happy_in_job, :happy_info,
+  def required_params
+    params.require(:junior_story)
+  end
+
+  def allowed_params(params)
+    params.permit(:job, :happy_in_job, :happy_info,
       :gender, :city, :country, :days_per_week, :salary, :currency, :technology, :focus,
       :age, :years_working_in_total, :years_working_at_job, :education, :first_job,
       :remote, :tech_team_size, :company_size, :company_age, :person_of_colour, :other,
       :publishing_consent, :freelancer, :person_with_disability)
+  end
+
+  # TODO: shouldn't hard code this, but I like having demo search terms in the list
+  def fields
+    {
+      job: "junior developer",
+      happy_in_job: "yes",
+      happy_info: "It's ok",
+      gender: "female",
+      city: "Berlin",
+      country: "DE",
+      days_per_week: "5",
+      salary: "15000",
+      currency: "€",
+      technology: "RoR",
+      focus: "backend",
+      age: 30,
+      years_working_total: "less than 1 year",
+      years_working_at_job: "less than 1 year",
+      education: "self taught",
+      first_job: "no",
+      remote: "no",
+      tech_team_size: "5 - 10 people",
+      company_size: "less than 10 people",
+      company_age: 5,
+      person_of_colour: false,
+      other: "Thanks",
+      freelancer: "f"
+    }
+  end
+
+  def params_set?
+    values = allowed_params(params).values
+    values.reject { |value| value.blank? || value.empty? || value.nil? }
+    !values.empty?
   end
 end

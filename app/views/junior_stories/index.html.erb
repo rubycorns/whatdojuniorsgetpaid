@@ -4,7 +4,43 @@
       <h1>Junior Stories:</h1>
     </div>
 
-    <%= link_to "Download as CSV", junior_stories_path(format: "csv"), class: 'btn btn-info' %>
+    <%= link_to "Download as CSV", junior_stories_path(@csv_params), class: 'btn btn-info' %>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+      Filter Stories
+    </button>
+    <% if @filtered %>
+    <%= link_to "Reset filters", junior_stories_path, class: 'btn btn-info' %>
+    <% end %>
+    <!-- Filter Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <%= form_tag({controller: "junior_stories", action: "index" }, { method: "get", class: "form-horizontal" }) do %>
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Filter for Fields</h4>
+            </div>
+            <div class="modal-body">
+              <% @fields.each do |name, demo_value| %>
+                <div class="form-group">
+                  <div class="col-sm-offset-1"></div>
+                  <label class="col-sm-4 control-label"><%= name %></label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" name="<%= name %>" placeholder="<%= demo_value %>">
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
     <div class='junior-stories'>
       <% @junior_stories.each do |j| %>

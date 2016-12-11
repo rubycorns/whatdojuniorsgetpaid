@@ -1,6 +1,7 @@
 require 'csv'
 
 class JuniorStory < ApplicationRecord
+  include Filterable
 
   validates :salary, presence: true
   validates :currency, presence: true
