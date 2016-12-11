@@ -134,10 +134,12 @@ class JuniorStory < ApplicationRecord
   end
 
   def self.to_csv(options = {})
+    column_names = attribute_names.delete_if { |i| ['id', 'created_at', 'updated_at', 'publishing_consent'].include?(i) }
+
     CSV.generate(options) do |csv|
-      csv << attribute_names
+      csv << column_names
       find_each do |story|
-        csv << story.publishable_attributes.values
+        csv << story.publishable_attributes.values_at(*column_names)
       end
     end
   end
