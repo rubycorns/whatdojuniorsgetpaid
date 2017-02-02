@@ -4,7 +4,6 @@ describe JuniorStory do
   let(:junior_story) { build :junior_story }
 
   describe 'sanitizing values' do
-
     before do
       junior_story.city = 'berlin     '
       junior_story.gender = '   Female   '
@@ -32,8 +31,8 @@ describe JuniorStory do
   end
 
   describe '.to_csv' do
-    let!(:junior_story)   { create :junior_story, publishing_consent: true }
-    let!(:junior_story_2) { create :junior_story, publishing_consent: false }
+    let!(:junior_story)   { create :junior_story }
+    let!(:junior_story_2) { create :junior_story_without_publishing_consent }
     let(:csv)             { JuniorStory.to_csv }
     let(:rows)            { csv.split("\n") }
 
@@ -45,10 +44,28 @@ describe JuniorStory do
     it 'should contain the correct attributes' do
       expect(rows.second.split(',').count).to eq(JuniorStory.attribute_names.count)
     end
+
+    it "doesn't contain attributes 'id', 'created_at', 'updated_at' and 'publishing_consent'" do
+      expect(rows.first.split(',')).not_to include('id')
+      expect(rows.first.split(',')).not_to include('created_at')
+      expect(rows.first.split(',')).not_to include('updated_at')
+      expect(rows.first.split(',')).not_to include('publishing_consent')
+    end
+
+    context 'with publishing consent' do
+      it "contains values for attributes that require publishing consent" do
+        expect(rows.second.split(',')).to include('I am happy.')
+      end
+    end
+
+    context 'no publishing consent' do
+      it "doesn't contain values for attributes that require publishing consent" do
+        expect(rows.third.split(',')).not_to include('I am happy.')
+      end
+    end
   end
 
   describe "#person_with_disability_sentence" do
-
     context "person with disability set to true" do
       let!(:junior_story) { build_stubbed :junior_story, person_with_disability: true }
       specify { expect(junior_story.person_with_disability_sentence).to eq 'I am a person with a disability.' }
@@ -58,7 +75,5 @@ describe JuniorStory do
       let!(:junior_story) { build_stubbed :junior_story, person_with_disability: false }
       specify { expect(junior_story.person_with_disability_sentence).to eq nil }
     end
-
   end
-
 end
