@@ -120,7 +120,7 @@ class JuniorStory < ApplicationRecord
   end
 
   def other_sentence
-    "Additional information: #{other}" if can_publish? && other.present?
+    "Additional information: #{other}." if can_publish? && other.present?
   end
 
   def publishable_attributes
